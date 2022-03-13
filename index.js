@@ -1,8 +1,9 @@
 
 const io = require("socket.io")(process.env.PORT || 8900, {
-  cors: {
-    origin: "https://anonymse-frontend.vercel.app",
-  },
+  allowRequest: (req, callback) => {
+    const noOriginHeader = req.headers.origin === undefined;
+    callback(null, noOriginHeader);
+  }
 });
 // const express = require("express")
 // const socketIO = require("socket.io")
